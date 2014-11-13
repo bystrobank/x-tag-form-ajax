@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>x-tag-form-ajax Demo</title>
+        <script type="text/javascript" src="x-tag-components.js"></script>
+        <script type="text/javascript" src="../src/formic.js"></script>
+        <script type="text/javascript" src="../src/json.js"></script>
+        <script type="text/javascript" src="../src/x-tag-form-ajax.js"></script>
+    </head>
+
+    <body>
+        <form id="f" method="post" enctype="application/json" action="#" data-x-tag="x-tag-form-ajax">
+            <input name="mix[0]" value="alpha"/>
+            <input name="mix[0]" value="bravo"/>
+            <input type="submit"/>
+        </form>
+        <pre id='log'></pre>
+        <script>
+            document.getElementById("f").addEventListener('submitted',
+                    function (event) {
+                        var request = event.detail.request;
+                        if (request.status <400) {
+                            alert(request);
+                        } else{
+                            alert(request.responseText);
+                        }
+                    }
+            );
+        </script>
+    </body>
+</html>

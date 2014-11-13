@@ -1,0 +1,19 @@
+{
+    "name": "x-tag-form-ajax",
+    "description": "x-x-tag-form-ajax",
+    "version": "0.0.1",
+    "keywords": [
+        "element",
+        "web-components",
+        "x-tag"
+    ],
+    "main": [
+        "src/formic.js",
+        "src/json.js",
+        "src/x-tag-form-ajax.js"
+
+    ],
+    "dependencies": {
+        "x-tag-core": "*"
+    }
+}
