@@ -10,6 +10,17 @@
         }
         return null;
     };
+    // create hidden input with clicked submit button name and value attributes
+    xtag.addEvent(document, 'click:delegate(form[data-x-tag=x-tag-form-ajax] button[type=submit])', function (event) {
+        var form=this.form;
+        if (!form.hiddenSubmitEl) {
+            form.hiddenSubmitEl=document.createElement('input');
+            form.hiddenSubmitEl.setAttribute('type', 'hidden');
+            form.appendChild(form.hiddenSubmitEl);
+        }
+        form.hiddenSubmitEl.setAttribute('name', this.name);
+        form.hiddenSubmitEl.setAttribute('value', this.value);
+    });
     xtag.addEvent(document, 'submit:delegate(form[data-x-tag=x-tag-form-ajax])', function (event) {
         event.preventDefault();
         event.stopPropagation();
@@ -21,17 +32,19 @@
         if (!action) {
             throw new Error('Invalid action!');
         }
-        var form=this;
+        var form = this;
         if (this.getAttribute("enctype") === "application/json") {
             applicationJSON(this, function (json) {
+                form.hiddenSubmitEl.removeAttribute("name");
                 var request = new XMLHttpRequest();
                 request.onreadystatechange = function () {
                     if (request.readyState === 4) {
-                        xtag.fireEvent(form, 'submitted', { detail: { request: request}});
+                        xtag.fireEvent(form, 'submitted', {detail: {request: request}});
                     }
                 };
                 request.open(method, action, true);
                 request.setRequestHeader('Content-Type', "application/json");
+                alert(JSON.stringify(json, null, 4));
                 request.send(JSON.stringify(json, null, 4));
             });
         }
