@@ -22,8 +22,10 @@
             document.getElementById("f").addEventListener('submitted',
                     function (event) {
                         var request = event.detail.request;
+                        var json= event.detail.data;
+                        document.getElementById("log").textContent=JSON.stringify(json, null, 4);
                         if (request.status <400) {
-                            alert(request);
+                            //do nothing
                         } else{
                             alert(request.responseText);
                         }

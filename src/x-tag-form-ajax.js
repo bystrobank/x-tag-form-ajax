@@ -39,12 +39,11 @@
                 var request = new XMLHttpRequest();
                 request.onreadystatechange = function () {
                     if (request.readyState === 4) {
-                        xtag.fireEvent(form, 'submitted', {detail: {request: request}});
+                        xtag.fireEvent(form, 'submitted', {detail: {request: request, data: json}});
                     }
                 };
                 request.open(method, action, true);
                 request.setRequestHeader('Content-Type', "application/json");
-                alert(JSON.stringify(json, null, 4));
                 request.send(JSON.stringify(json, null, 4));
             });
         }
