@@ -11,7 +11,7 @@
         return null;
     };
     // create hidden input with clicked submit button name and value attributes
-    xtag.addEvent(document, 'click:delegate(form[data-x-tag=x-tag-form-ajax] button[type=submit])', function (event) {
+    xtag.addEvent(document, 'click:delegate(form[data-x-tag=x-form-ajax] button[type=submit])', function (event) {
         var form=this.form;
         if (!form.hiddenSubmitEl) {
             form.hiddenSubmitEl=document.createElement('input');
@@ -21,7 +21,7 @@
         form.hiddenSubmitEl.setAttribute('name', this.name);
         form.hiddenSubmitEl.setAttribute('value', this.value);
     });
-    xtag.addEvent(document, 'submit:delegate(form[data-x-tag=x-tag-form-ajax])', function (event) {
+    xtag.addEvent(document, 'submit:delegate(form[data-x-tag=x-form-ajax])', function (event) {
         event.preventDefault();
         event.stopPropagation();
         var method = getValidMethod(this.getAttribute('method'));
