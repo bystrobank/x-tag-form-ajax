@@ -37,7 +37,9 @@
                 var form = this;
                 if (this.getAttribute("enctype") === "application/json") {
                     applicationJSON(this, function (json) {
-                        form.hiddenSubmitEl.removeAttribute("name");
+                        if(form.hiddenSubmitEl) {
+                            form.hiddenSubmitEl.removeAttribute("name");
+                        }
                         var request = new XMLHttpRequest();
                         request.onreadystatechange = function () {
                             if (request.readyState === 4) {
