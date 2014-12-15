@@ -26,6 +26,10 @@
             'submit': function (event) {
                 event.preventDefault();
                 event.stopPropagation();
+                if(this.submitting){
+                    return false;
+                }
+                this.submitting=true;
                 var method = getValidMethod(this.getAttribute('method'));
                 if (!method) {
                     throw new Error('Invalid method!');
@@ -44,6 +48,7 @@
                         request.onreadystatechange = function () {
                             if (request.readyState === 4) {
                                 xtag.fireEvent(form, 'submitted', {detail: {request: request, data: json}});
+                                form.submitting=false;
                             }
                         };
                         request.open(method, action, true);
