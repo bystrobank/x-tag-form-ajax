@@ -10,7 +10,8 @@
     "main": [
         "src/formic.js",
         "src/json.js",
-        "src/form-ajax.js"
+        "src/form-ajax.js",
+        "src/form-ajax.css"
 
     ],
     "dependencies": {
