@@ -1,5 +1,6 @@
 /*global applicationJSON */
 (function () {
+    var SUBMITTING_CSS_CLASS="submitting";
     var getValidMethod = function (method) {
         if (method) {
             var proposedMethod = method.toUpperCase();
@@ -26,10 +27,11 @@
             'submit': function (event) {
                 event.preventDefault();
                 event.stopPropagation();
-                if(this.submitting){
+                if(this.classList.contains(SUBMITTING_CSS_CLASS)){
+                    alert("please wait...");
                     return false;
                 }
-                this.submitting=true;
+                this.classList.add(SUBMITTING_CSS_CLASS);
                 var method = getValidMethod(this.getAttribute('method'));
                 if (!method) {
                     throw new Error('Invalid method!');
@@ -48,7 +50,7 @@
                         request.onreadystatechange = function () {
                             if (request.readyState === 4) {
                                 xtag.fireEvent(form, 'submitted', {detail: {request: request, data: json}});
-                                form.submitting=false;
+                                form.classList.remove(SUBMITTING_CSS_CLASS);
                             }
                         };
                         request.open(method, action, true);
