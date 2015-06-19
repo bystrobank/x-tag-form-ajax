@@ -27,6 +27,9 @@
             'submit': function (event) {
                 event.preventDefault();
                 event.stopPropagation();
+                if(!this.validate()){
+                    return false;
+                }
                 if(this.classList.contains(SUBMITTING_CSS_CLASS)){
                     alert("please wait...");
                     return false;
@@ -59,6 +62,11 @@
                     });
                 }
 
+            }
+        },
+        methods: {
+            validate: function() {
+                return true;
             }
         }
     });
