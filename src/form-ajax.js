@@ -73,7 +73,7 @@
                         request.setRequestHeader('Content-Type', "application/json");
                         request.send(JSON.stringify(json, null, 4));
                     },rettpl);
-
+                }
             }
         },
         methods: {
