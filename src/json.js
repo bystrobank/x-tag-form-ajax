@@ -97,9 +97,9 @@
             }
         }
     }
-    window.applicationJSON = function (form, cb) {
+    window.applicationJSON = function (form, cb,rettpl) {
         var data = formic.formDataSet(form, { booleanChecked: true })
-        ,   ret = {}
+        ,   ret = rettpl || {}
         ,   files = []
         ,   read = 0
         ;

@@ -45,6 +45,19 @@
                 }
                 var form = this;
                 if (this.getAttribute("enctype") === "application/json") {
+                    var rettpl=null;
+                    if(this.getAttribute("proporder")!==null && this.getAttribute("proporder").trim!==""){
+                        rettpl={};
+                        var order=this.getAttribute("proporder").split(",");
+                        for (var i=0; i<order.length; i++ ) {
+                            var parts=order[i].trim().split(".");
+                            if(rettpl[parts[0]]===undefined){
+                                rettpl[parts[0]]={};
+                            }
+                            rettpl[parts[0]][parts[1]]=undefined;
+                        }
+                    }
+                    //console.log(JSON.stringify(rettpl));
                     applicationJSON(this, function (json) {
                         if(form.hiddenSubmitEl) {
                             form.hiddenSubmitEl.removeAttribute("name");
@@ -59,8 +72,7 @@
                         request.open(method, action, true);
                         request.setRequestHeader('Content-Type', "application/json");
                         request.send(JSON.stringify(json, null, 4));
-                    });
-                }
+                    },rettpl);
 
             }
         },
